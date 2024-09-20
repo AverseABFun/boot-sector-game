@@ -5,9 +5,10 @@ bits 16
 
 %include "src/common.s"
 
-%define print_text(text_name) \
-    mov si, text_name \
+%macro print_text 1
+    mov si, %1
     call print
+%endmacro
 
 disable_cursor:
     pusha

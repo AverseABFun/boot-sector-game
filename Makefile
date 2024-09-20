@@ -1,6 +1,6 @@
 all: clean text disk.img emulate
 
-debug: clean text disk.img preprocess emulate-debug
+debug: clean text preprocess disk.img emulate-debug
 
 .PHONY: clean text preprocess emulate emulate-debug
 
