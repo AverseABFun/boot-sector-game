@@ -13,7 +13,7 @@ call clear_screen
 call blink_cursor
 print_text hello_world
 
-mov al, 1
+mov al, [hello_world_lines]
 call add_lines
 
 set_cur_pos [cursor_row], [cursor_column]

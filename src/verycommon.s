@@ -96,11 +96,9 @@ scroll_up: ;http://www.ctyme.com/intr/rb-0096.htm
 
 add_lines: ;AL has number of lines
     pusha
-    add al, [cursor_row]
-    mov [cursor_row], al
+    add byte [cursor_row], al
 
-    mov al, 0
-    mov [cursor_column], al
+    mov byte [cursor_column], 0
 
     mov al, [cursor_row]
 
