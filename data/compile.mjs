@@ -34,7 +34,7 @@ for (const name of Object.keys(file)) {
     file[name] = file[name].split("\n")
     var toUse = file[name]
     if (file[name].length == 1) {
-        toUse = "\"" + file[name][0] + "\""
+        toUse = "\"" + file[name][0] + "\", 0"
     } else {
         var out2 = ""
         var i = 0;

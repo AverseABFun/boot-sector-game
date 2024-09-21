@@ -5,9 +5,17 @@ bits 16
 
 %include "src/common.s"
 
+%macro print_raw_text 1
+    mov si, %1
+    call print
+%endmacro
+
 %macro print_text 1
     mov si, %1
     call print
+    mov al, [%1_lines]
+    call add_lines
+    set_cur_pos [cursor_row], [cursor_column]
 %endmacro
 
 %macro set_cur_pos 2
@@ -32,7 +40,7 @@ enable_cursor:
 
     mov ah, 01h       ;Command
     mov ch, 00000000b ;bits 6-7 unused, bit 5 disables cursor, bits 0-4 control cursor shape
-    mov cl, 00h
+    mov cl, 0Fh
     int 10h           ;Call video interrupt
 
     popa
@@ -43,7 +51,7 @@ blink_cursor:
 
     mov ah, 01h       ;Command
     mov ch, 01000000b ;bits 6-7 unused, bit 5 disables cursor, bits 0-4 control cursor shape
-    xor cl, cl
+    mov cl, 0Fh
     int 10h           ;Call video interrupt
 
     popa
@@ -121,5 +129,10 @@ add_lines: ;AL has number of lines
 
 cursor_column: db 0 ;up to 80
 cursor_row: db 1    ;up to 25
+
+get_char:
+    mov ah, 00h
+    int 16h
+    ret
 
 %endif
