@@ -1,6 +1,3 @@
 {
-    "hello_world": "Hello, world!\nHello, world!\n",
-    "prompt": "> ",
-    "too_much_input": "Reached input limit of 255 characters!",
-    "help_text": "Help command has run!!\n"
+    "hello_world": "Hello, world!\nHello, world!\n"
 }
