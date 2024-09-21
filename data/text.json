@@ -1,3 +1,7 @@
 {
-    "hello_world": "Hello, world!\nHello, world!\n"
+    "menu": "Welcome to the...\n____________   __________________   _______  ____   _______  _______  ____ \n|__|  |  ||    [__|__|   ||  |__/   | _|__|\\/|___   |  |  |\\ [__|  |  |___ \n|__|__|__||    ___|__|___||__|  \\   |__|  |  |___   |__|__| \\___|__|__|___ \n\n1. Start Snake\n2. Start Pong\n3. Shutdown computer\n",
+    "apm_error": "Got an APM error; cannot shutdown!",
+    "snake_outline": "/-------------------------\\\n|                         |\n|                         |\n|                         |\n|                         |\n|                         |\n|                         |\n|                         |\n|                         |\n|                         |\n|                         |\n|                         |\n|                         |\n|                         |\n|                         |\n\\-------------------------/",
+    "snake_no_random": "Randomness is not available on this CPU!\n",
+    "snake_unimplemented": "Sorry, snake is unimplemented.\n"
 }

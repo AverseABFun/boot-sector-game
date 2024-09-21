@@ -86,7 +86,7 @@ err3loop:
 
 
 err3exit:
-	jmp 0xFFFF:0 ;restart vector/triple fault
+	jmp 0xFFFF:0 ;restart vector
 
 main:
 	mov si, LOADING

@@ -42,11 +42,10 @@ for (const name of Object.keys(file)) {
             out2 += "\""+item
             if (i != file[name].length-1) {
                 out2 += "\", 0Ah, 0Dh, "
+            } else {
+                out2 += "\", "
             }
             i++
-        }
-        if (out2.endsWith("\"")) {
-            out2 = out2.slice(0, -1)
         }
         out2 += "0"
         toUse = out2

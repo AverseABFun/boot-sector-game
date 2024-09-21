@@ -26,6 +26,15 @@ bits 16
     call set_cursor_position
 %endmacro
 
+delay: ;CX:DX Number of microseconds to elapse
+    pusha
+
+    mov ah, 86h
+    int 83h
+
+    popa
+    ret
+
 disable_cursor:
     pusha
 
@@ -131,6 +140,11 @@ add_lines: ;AL has number of lines
 
 cursor_column: db 0 ;up to 80
 cursor_row: db 1    ;up to 25
+
+%define SC_UP_ARROW 48h
+%define SC_DOWN_ARROW 50h
+%define SC_LEFT_ARROW 4Bh
+%define SC_RIGHT_ARROW 4Dh
 
 get_char:
     mov ah, 00h
