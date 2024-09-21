@@ -5,9 +5,10 @@ jmp start
 %include "src/common.s"
 %include "src/verycommon.s"
 %include "src/generated/text.s"
+%include "src/command_table.s"
 
 entered_text: times 256 db 0
-index: db 0
+index: dw 0
 
 last_cursor_column: db 0
 
@@ -35,7 +36,7 @@ jne cl_re
 call run_cmd
 
 cl_re:
-cmp byte [index], 255
+cmp word [index], 65535
 je reached_input_limit
 
 mov bx, entered_text
@@ -51,10 +52,45 @@ set_cur_pos [cursor_row], [cursor_column]
 
 jmp core_loop
 
+run_index: db 0
+run_base_cmd_addr: dw 0
+run_name_length: dw 0
+run_name_base_addr: dw 0
+run_call_addr: dw 0
 run_cmd:
+mov bx, [run_base_cmd_addr]
+add bx, commands_table
+mov bx, [bx]
+mov [run_name_length], bx
+
+mov bx, [run_base_cmd_addr]
+mov [run_name_length], bx
+add word [run_base_cmd_addr], 2
+
+mov bx, [run_base_cmd_addr]
+mov [run_name_base_addr], bx
+mov bx, [run_name_length]
+add word [run_base_cmd_addr], bx
+
+mov bx, [run_base_cmd_addr]
+mov bx, [bx]
+mov [run_call_addr], bx
+
+;mov bx, [run_name_length]
+;cmp [index], bx
+;jne past_checks
+
+call [run_call_addr]
+jmp end_run_search
+
+past_checks:
+add byte [run_index], 1
+cmp byte [run_index], number_of_commands
+jl run_cmd
+
+end_run_search:
 
 xor al, al
-
 clear_loop:
 
 mov bx, entered_text

@@ -15,6 +15,8 @@ bits 16
     call print
     mov al, [%1_lines]
     call add_lines
+    mov al, [%1_length]
+    add [cursor_column], al
     set_cur_pos [cursor_row], [cursor_column]
 %endmacro
 

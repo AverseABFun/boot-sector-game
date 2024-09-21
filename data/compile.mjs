@@ -52,7 +52,7 @@ for (const name of Object.keys(file)) {
         toUse = out2
     }
     out += `_TEXTC ${name},${toUse}\n`
-    out += `_TEXTL ${name}_length,${orig.length + (file[name].length*2) - 2}\n`
+    out += `_TEXTL ${name}_length,${file[name][file[name].length-1].length}\n`
     out += `_TEXTLI ${name}_lines,${file[name].length-1}\n`
 }
 
