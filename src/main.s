@@ -8,6 +8,9 @@ jmp start
 
 start:
 
-call disable_cursor
-print_text(hello_world)
+call clear_screen
+
+call blink_cursor
+print_text hello_world
+set_cur_pos 1d, 13d
 hlt
