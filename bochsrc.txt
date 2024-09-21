@@ -1,1 +1,2 @@
 floppya: 1_44=disk.img, status=inserted
+plugin_ctrl: speaker=0

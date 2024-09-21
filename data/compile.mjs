@@ -21,10 +21,10 @@ bits 16
     %1: db %2
 %endmacro
 %macro _TEXTL 2+
-    %1: dw %2
+    %1: db %2
 %endmacro
 %macro _TEXTLI 2+
-    %1: dw %2
+    %1: db %2
 %endmacro
 
 `
@@ -36,14 +36,17 @@ for (const name of Object.keys(file)) {
     if (file[name].length == 1) {
         toUse = "\"" + file[name][0] + "\""
     } else {
-        var out2 = "\""
+        var out2 = ""
         var i = 0;
         for (const item of file[name]) {
-            out2 += item
+            out2 += "\""+item
             if (i != file[name].length-1) {
                 out2 += "\", 0Ah, 0Dh, "
             }
             i++
+        }
+        if (out2.endsWith("\"")) {
+            out2 = out2.slice(0, -1)
         }
         out2 += "0"
         toUse = out2

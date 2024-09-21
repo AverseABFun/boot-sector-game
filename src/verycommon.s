@@ -94,52 +94,34 @@ scroll_up: ;http://www.ctyme.com/intr/rb-0096.htm
     popa
     ret
 
-
-push_cursor: ;AL has number of columns
-    pusha
-
-    add [cursor_column], al
-
-    cmp byte [cursor_column], 80
-
-    jl pc_end
-
-    pc_loop:
-        add byte [cursor_row], 1
-        
-        cmp byte [cursor_row], 25
-        jl pc_cont
-
-        call scroll_up
-        sub byte [cursor_row], 1
-
-        pc_cont:
-        sub byte [cursor_column], 80
-
-        cmp byte [cursor_column], 80
-        jge pc_loop
-
-    pc_end:
-    popa
-    ret
-
 add_lines: ;AL has number of lines
     pusha
-    add [cursor_row], AL
+    add al, [cursor_row]
+    mov [cursor_row], al
 
-    cmp byte [cursor_row], 0
-    jle al_end
+    mov al, 0
+    mov [cursor_column], al
 
-    mov byte [cursor_column], 1d
+    mov al, [cursor_row]
+
+    cmp al, 25
+    jl al_end
+
+    scroll_loop:
+    call scroll_up
+
+    sub al, 1
+
+    cmp al, 25
+    jge scroll_loop
+
+    mov [cursor_row], al
 
     al_end:
-    mov al, 00d
-    call push_cursor
-
     popa
     ret
 
-cursor_column: db 0d ;up to 80
-cursor_row: db 1d    ;up to 25
+cursor_column: db 0 ;up to 80
+cursor_row: db 1    ;up to 25
 
 %endif
