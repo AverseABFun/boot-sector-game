@@ -123,7 +123,23 @@ push_cursor: ;AL has number of columns
     popa
     ret
 
-cursor_column: db 1d ;up to 80
+add_lines: ;AL has number of lines
+    pusha
+    add [cursor_row], AL
+
+    cmp byte [cursor_row], 0
+    jle al_end
+
+    mov byte [cursor_column], 1d
+
+    al_end:
+    mov al, 00d
+    call push_cursor
+
+    popa
+    ret
+
+cursor_column: db 0d ;up to 80
 cursor_row: db 1d    ;up to 25
 
 %endif

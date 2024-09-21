@@ -8,7 +8,7 @@ clean:
 	rm -f disk.bin
 	rm -f disk.img
 
-src/generated/text.s: data/text.json
+src/generated/text.s: data/text.json data/compile.mjs
 	node data/compile.mjs
 
 text: src/generated/text.s

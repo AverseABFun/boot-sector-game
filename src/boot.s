@@ -101,7 +101,7 @@ main:
 	mov si, LOADOK
 	call bprint
 
-	jmp 7e00h  ; Jump to loaded code at 0x1000:0x0000
+	jmp 7e00h  ; Jump to loaded code
 
 LOADING     db "Loading...", 0Ah, 0Dh, 0
 FAILURE_MSG db "ERROR: Press any key to reboot.", 0Ah, 0Dh, 0
